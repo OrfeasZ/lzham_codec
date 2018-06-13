@@ -7,14 +7,6 @@ add_project_arguments(
 	language: [ 'cpp', 'c' ]
 )
 
-if get_option('static_runtime')
-	if get_option('buildtype') == 'release'
-		add_project_arguments('/MT', language: [ 'cpp', 'c' ])
-	else
-		add_project_arguments('/MTd', language: [ 'cpp', 'c' ])
-	endif
-endif
-
 include_dir = include_directories('include')
 
 subdir('lzhamdecomp')
