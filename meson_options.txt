@@ -1,0 +1,1 @@
+option('static_runtime', type: 'boolean', value: false, description: 'Link using the static C++ runtime')

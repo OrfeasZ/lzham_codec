@@ -1,0 +1,31 @@
+project('lzham', 'cpp')
+
+add_project_arguments(
+	'-D_WIN32_WINNT=0x0601',
+	'-DWINVER=0x0601',
+	'-DWIN32',
+	language: [ 'cpp', 'c' ]
+)
+
+if get_option('static_runtime')
+	if get_option('buildtype') == 'release'
+		add_project_arguments('/MT', language: [ 'cpp', 'c' ])
+	else
+		add_project_arguments('/MTd', language: [ 'cpp', 'c' ])
+	endif
+endif
+
+include_dir = include_directories('include')
+
+subdir('lzhamdecomp')
+subdir('lzhamcomp')
+subdir('lzhamlib')
+
+lzham_dep = declare_dependency(
+	include_directories: include_dir,
+	dependencies: [
+		lzhamcomp_dep,
+		lzhamdecomp_dep,
+		lzhamlib_dep,
+	]
+)
